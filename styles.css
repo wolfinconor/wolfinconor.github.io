@@ -361,8 +361,8 @@ textarea:focus-visible {
 }
 
 .compare-card h3 svg {
-  width: 22px;
-  height: 22px;
+  width: 1em;
+  height: 1em;
   flex-shrink: 0;
 }
 
