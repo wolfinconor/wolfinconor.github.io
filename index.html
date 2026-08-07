@@ -1,83 +1,457 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conor Wolfin</title>
-  <style>
-    :root {
-      --bg: #0f1115;
-      --fg: #f4f4f5;
-      --accent: #6ee7b7;
-      --muted: #9ca3af;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg);
-      color: var(--fg);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      text-align: center;
-      padding: 2rem;
-    }
-    .card {
-      max-width: 32rem;
-    }
-    h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      margin-bottom: 0.5rem;
-    }
-    p {
-      color: var(--muted);
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-    .accent {
-      color: var(--accent);
-    }
-    .tag {
-      display: inline-block;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      border: 1px solid #2a2d34;
-      border-radius: 999px;
-      padding: 0.3rem 0.9rem;
-      margin-bottom: 1.25rem;
-    }
-    .links {
-      margin-top: 2rem;
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-    }
-    .links a {
-      color: var(--fg);
-      text-decoration: none;
-      border: 1px solid #2a2d34;
-      padding: 0.6rem 1.2rem;
-      border-radius: 999px;
-      transition: border-color 0.2s ease;
-    }
-    .links a:hover {
-      border-color: var(--accent);
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buyer Led Representation | Flat-Fee Home Buyer's Agent in Washington State</title>
+  <meta name="description" content="Flat-fee buyer's agent representation in Washington State. Pay one transparent price instead of a 2.5–3% commission. Full legal protection, expert negotiation, free consultation." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Buyer Led Representation | Flat-Fee Home Buyer's Agent in Washington State" />
+  <meta property="og:description" content="Pay one flat fee, not a percentage. Full legal protection, expert negotiation, and support where it matters — licensed in Washington State." />
+  <!-- TODO: replace with your live domain and a real social preview image (1200x630) before launch -->
+  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:image" content="https://example.com/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon: inline terracotta house/key mark, no external file needed -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C1704F'/%3E%3Cpath d='M32 14 12 30h6v20h10V36h8v14h10V30h6z' fill='%23FBF5EC'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- TODO: Drop Google Analytics / Meta Pixel snippet here when ready -->
 </head>
 <body>
-  <div class="card">
-    <span class="tag">Under construction</span>
-    <h1>Conor <span class="accent">Wolfin</span></h1>
-    <p>Welcome to my landing page. More coming soon.</p>
-    <div class="links">
-      <a href="https://github.com/wolfinconor" target="_blank" rel="noopener">GitHub</a>
-      <a href="mailto:conorwolfin@gmail.com">Email</a>
+  <a class="skip-link" href="#lead-form">Skip to booking form</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="#top">Buyer Led <span>Representation</span></a>
+      <a class="btn btn-primary nav-cta" href="#lead-form">Book Free Consult</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- 1. Hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-inner">
+        <h1 id="hero-heading">Buy your next Washington home. Skip the 3% commission.</h1>
+        <p class="subhead">
+          Full legal representation and expert negotiation for one flat fee — not a
+          percentage of your purchase price. Licensed, disclosed, and built for buyers
+          who don't want to overpay for help they don't need.
+        </p>
+
+        <div class="hero-badges">
+          <span class="badge">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            WA Licensed Broker
+          </span>
+          <span class="badge">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Flat Fee, No Surprises
+          </span>
+          <span class="badge">
+            <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            Full Statutory Protection
+          </span>
+        </div>
+
+        <div class="price-callout">
+          <span class="amount">$5,000</span>
+          <span class="label">flat base fee<br />vs. 2.5–3% of your purchase price</span>
+        </div>
+
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#lead-form">Book My Free Consultation</a>
+          <a class="btn btn-secondary" href="#pricing">See Pricing</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Is this you? -->
+    <section class="section section-alt" id="is-this-you" aria-labelledby="persona-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Is this you?</span>
+          <h2 id="persona-heading">Buyers usually come to me for one of three reasons</h2>
+        </div>
+
+        <div class="persona-grid">
+          <article class="persona-card">
+            <div class="persona-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>The Money-Saver</h3>
+            <p>Why pay 2.5–3% in commission when you don't need full service? Keep the difference — it could be thousands back in your pocket.</p>
+          </article>
+
+          <article class="persona-card">
+            <div class="persona-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 21V9a3 3 0 013-3h0a3 3 0 013 3v12M3 21h18M6 21v-6a2 2 0 012-2h1M18 21v-6a2 2 0 00-2-2h-1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>The Control-Seeker</h3>
+            <p>Already comfortable house-hunting and touring open houses yourself? Skip paying for what you don't need — get an expert for the technical and legal parts.</p>
+          </article>
+
+          <article class="persona-card">
+            <div class="persona-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l9 4.5v6c0 5-3.8 8.7-9 9.5-5.2-.8-9-4.5-9-9.5v-6L12 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>The Fee-Skeptic</h3>
+            <p>Never liked how percentage-based commissions work? Full representation. No percentage. No surprises — just one clear price, agreed up front.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. What's included / what you handle -->
+    <section class="section" id="whats-included" aria-labelledby="included-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">How it splits</span>
+          <h2 id="included-heading">What I handle, what you handle</h2>
+          <p>You stay in control of the search. I handle everything that requires a license, legal precision, or negotiation experience.</p>
+        </div>
+
+        <div class="compare-grid">
+          <div class="compare-card">
+            <h3>
+              <svg class="icon-check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg>
+              I handle
+            </h3>
+            <ul class="compare-list">
+              <li><svg class="icon-check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg> Offer preparation &amp; strategy</li>
+              <li><svg class="icon-check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg> Negotiation with listing agents</li>
+              <li><svg class="icon-check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg> Disclosures &amp; contract review</li>
+              <li><svg class="icon-check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg> Agent-to-agent mediation</li>
+              <li><svg class="icon-check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg> Paperwork &amp; transaction admin</li>
+              <li><svg class="icon-check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg> Deadlines &amp; closing coordination</li>
+            </ul>
+          </div>
+
+          <div class="compare-card client">
+            <h3>
+              <svg class="icon-check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg>
+              You handle
+            </h3>
+            <ul class="compare-list">
+              <li><svg class="icon-check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg> Searching listings &amp; neighborhoods</li>
+              <li><svg class="icon-check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg> Attending open houses</li>
+              <li><svg class="icon-check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg> Evaluating homes you're interested in</li>
+              <li><svg class="icon-check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg> Deciding what to offer on</li>
+              <li><svg class="icon-check" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg> Want private tours instead? Add them anytime</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Pricing -->
+    <section class="section section-alt" id="pricing" aria-labelledby="pricing-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Pricing</span>
+          <h2 id="pricing-heading">One flat fee. No percentage, ever.</h2>
+        </div>
+
+        <div class="pricing-card">
+          <div class="amount">$5,000</div>
+          <div class="amount-label">Base flat fee — full representation from offer to close</div>
+
+          <div class="addons">
+            <div class="addon-row">
+              <span>Private home tours</span>
+              <span class="addon-price">~$100 / tour</span>
+            </div>
+            <div class="addon-row">
+              <span>Off-market listing access</span>
+              <span class="addon-price">~$350</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="pricing-note">
+          Fees shown are estimates and confirmed in writing at your free consultation
+          before anything is signed.
+        </p>
+
+        <div class="savings-compare" aria-label="Flat fee versus traditional commission example">
+          <div class="savings-box traditional">
+            <div class="savings-label">Traditional 2.5–3%</div>
+            <div class="savings-amount">$17,500</div>
+            <div>on a $700,000 home</div>
+          </div>
+          <div class="savings-vs">vs.</div>
+          <div class="savings-box flatfee">
+            <div class="savings-label">Buyer Led flat fee</div>
+            <div class="savings-amount">$5,000</div>
+            <div>same $700,000 home</div>
+          </div>
+        </div>
+        <p class="savings-result"><span>You could save roughly $12,500</span> on a $700,000 purchase — example only, actual savings vary by price and terms.</p>
+      </div>
+    </section>
+
+    <!-- 5. How it works -->
+    <section class="section" id="how-it-works" aria-labelledby="how-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Process</span>
+          <h2 id="how-heading">How it works</h2>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Free consult</h3>
+            <p>We talk through your search, timeline, and how flat-fee representation fits.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Sign agreement</h3>
+            <p>A clear, written services agreement — fees confirmed, no surprises later.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>We handle the transaction</h3>
+            <p>Offers, negotiation, disclosures, and paperwork — while you keep searching.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <h3>Close</h3>
+            <p>You close on your home having paid one flat fee, not a percentage.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Credibility strip -->
+    <section class="section credibility" id="credibility" aria-labelledby="credibility-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Credibility</span>
+          <h2 id="credibility-heading">Licensed. Disclosed. Accountable.</h2>
+          <p>This is a licensed brokerage offering — not an unlicensed or DIY arrangement. All statutory Washington broker duties apply to your transaction.</p>
+        </div>
+
+        <div class="cred-grid">
+          <div class="cred-item">
+            <div class="cred-value">#25007529</div>
+            <div class="cred-label">Washington State real estate license</div>
+          </div>
+          <div class="cred-item">
+            <div class="cred-value">Conor Wolfin</div>
+            <div class="cred-label">Licensed real estate broker</div>
+          </div>
+          <div class="cred-item">
+            <!-- TODO: replace with brokerage name/logo once finalized -->
+            <div class="cred-value">[Brokerage Name]</div>
+            <div class="cred-label">Affiliated brokerage — placeholder</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials placeholder — enable once reviews are collected -->
+    <!--
+    <section class="section" id="testimonials" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">What clients say</span>
+          <h2 id="testimonials-heading">Testimonials</h2>
+        </div>
+      </div>
+    </section>
+    -->
+
+    <!-- 7. Lead form -->
+    <section class="section section-alt" id="lead-form-section" aria-labelledby="lead-form-heading">
+      <div class="container-narrow">
+        <div class="section-header">
+          <span class="eyebrow">Get started</span>
+          <h2 id="lead-form-heading">Book your free consultation</h2>
+          <p>No obligation. We'll talk through your situation and whether flat-fee representation is a fit.</p>
+        </div>
+
+        <div class="form-card" id="form-card">
+          <div id="form-error" class="form-error hidden" role="alert"></div>
+
+          <!-- TODO: replace YOUR_ID with your real Formspree form endpoint before launch -->
+          <form id="lead-form" action="https://formspree.io/f/YOUR_ID" method="POST">
+            <div class="form-field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" autocomplete="name" required />
+            </div>
+
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required />
+            </div>
+
+            <div class="form-field">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" required />
+            </div>
+
+            <div class="form-field">
+              <label for="goal">Where are you in your search?</label>
+              <select id="goal" name="goal" required>
+                <option value="">Select one…</option>
+                <option value="Just starting to look">Just starting to look</option>
+                <option value="Actively touring homes">Actively touring homes</option>
+                <option value="Ready to make an offer">Ready to make an offer</option>
+                <option value="Under contract, need help closing">Under contract, need help closing</option>
+                <option value="Just comparing options">Just comparing options</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Book My Free Consultation</button>
+            <p class="form-note">By submitting, you agree to be contacted about your home search. No spam, ever.</p>
+          </form>
+
+          <div id="form-success" class="form-success hidden" tabindex="-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3>Thanks — you're on the calendar list.</h3>
+            <p>I'll reach out shortly to schedule your free consultation. Talk soon.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">FAQ</span>
+          <h2 id="faq-heading">Common questions</h2>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <h3>
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
+                Is this legal in Washington?
+                <svg class="faq-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+              </button>
+            </h3>
+            <div class="faq-answer" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden>
+              Yes. This is a licensed, disclosed limited-service representation model
+              permitted under Washington real estate law. Fees and scope are agreed to
+              in writing before any work begins.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3>
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
+                What if I want more help than the flat fee covers?
+                <svg class="faq-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+              </button>
+            </h3>
+            <div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden>
+              No problem — add-ons like private tours or off-market listing access are
+              available anytime, and we can discuss any additional support you need
+              during your consultation.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3>
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
+                Do I still get full legal protection?
+                <svg class="faq-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+              </button>
+            </h3>
+            <div class="faq-answer" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden>
+              Yes. All statutory broker duties under Washington law still apply to your
+              transaction, regardless of the fee structure. You're fully represented.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3>
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+                Why is this cheaper than a traditional agent?
+                <svg class="faq-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+              </button>
+            </h3>
+            <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden>
+              A traditional commission scales with your purchase price even though the
+              work doesn't. A flat fee reflects the actual work involved, and if you're
+              already comfortable searching on your own, you're not paying for services
+              you don't use.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3>
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
+                What happens at the free consultation?
+                <svg class="faq-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+              </button>
+            </h3>
+            <div class="faq-answer" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden>
+              We'll talk through where you are in your search, confirm the flat fee and
+              any add-ons for your situation, and answer any questions — no obligation
+              to sign anything.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3>
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">
+                Does the seller still pay anything toward this?
+                <svg class="faq-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+              </button>
+            </h3>
+            <div class="faq-answer" id="faq-a6" role="region" aria-labelledby="faq-q6" hidden>
+              It depends on the offer and negotiation — in some cases seller
+              concessions can help cover part of the fee. We'll walk through your
+              specific scenario at the consultation.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 9. Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <p><a href="mailto:conorwolfin@gmail.com">conorwolfin@gmail.com</a></p>
+          <p><a href="tel:+14256917770">425-691-7770</a></p>
+        </div>
+        <div class="footer-col">
+          <h3>License</h3>
+          <p>WA License #25007529</p>
+          <!-- TODO: add brokerage name/logo -->
+          <p>[Brokerage Name — TODO]</p>
+        </div>
+        <div class="footer-col">
+          <h3>Buyer Led Representation</h3>
+          <p><a href="#pricing">Pricing</a></p>
+          <p><a href="#faq">FAQ</a></p>
+          <p><a href="#lead-form">Book a consult</a></p>
+        </div>
+      </div>
+
+      <p class="footer-disclaimer">
+        This page is for informational purposes only and does not constitute legal or
+        real estate advice. All fees, services, and terms are confirmed in a written
+        services agreement prior to representation.
+      </p>
     </div>
-  </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
