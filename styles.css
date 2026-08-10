@@ -60,7 +60,7 @@ p {
 }
 
 .section {
-  padding: 4.5rem 1.25rem;
+  padding: 3.5rem 1.25rem;
 }
 
 .section-alt {
@@ -90,7 +90,7 @@ p {
 .section-header {
   text-align: center;
   max-width: 640px;
-  margin: 0 auto 2.75rem;
+  margin: 0 auto 2rem;
 }
 
 .section-header p {
@@ -330,7 +330,7 @@ textarea:focus-visible {
 
 /* What's included comparison */
 .compare-category {
-  margin-bottom: 2.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .compare-category:last-child {
@@ -341,13 +341,13 @@ textarea:focus-visible {
   text-align: center;
   font-size: 1.05rem;
   color: var(--warm-gray);
-  margin-bottom: 1rem;
+  margin: 0 0 0.6rem;
 }
 
 .compare-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 @media (min-width: 720px) {
@@ -359,7 +359,7 @@ textarea:focus-visible {
 .compare-card {
   background: #fff;
   border-radius: var(--radius);
-  padding: 1.75rem;
+  padding: 1.25rem 1.5rem 1.4rem;
   box-shadow: var(--shadow);
   border-top: 4px solid var(--terracotta);
 }
@@ -370,7 +370,7 @@ textarea:focus-visible {
 
 .compare-card h4 {
   font-size: 1rem;
-  margin-bottom: 0.65rem;
+  margin: 0 0 0.5rem;
   color: var(--terracotta-deep);
 }
 
@@ -378,10 +378,24 @@ textarea:focus-visible {
   color: #5f6d45; /* darkened sage for AA-contrast text on white */
 }
 
-.compare-card p {
+.compare-card ul {
   margin: 0;
-  font-size: 0.98rem;
-  line-height: 1.55;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.compare-card li {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.compare-card li::marker {
+  color: var(--terracotta-deep);
+}
+
+.compare-card.client li::marker {
+  color: #5f6d45;
 }
 
 /* Pricing */
