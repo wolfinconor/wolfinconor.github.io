@@ -329,6 +329,21 @@ textarea:focus-visible {
 }
 
 /* What's included comparison */
+.compare-category {
+  margin-bottom: 2.25rem;
+}
+
+.compare-category:last-child {
+  margin-bottom: 0;
+}
+
+.compare-category-title {
+  text-align: center;
+  font-size: 1.05rem;
+  color: var(--warm-gray);
+  margin-bottom: 1rem;
+}
+
 .compare-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -353,43 +368,21 @@ textarea:focus-visible {
   border-top-color: var(--sage);
 }
 
-.compare-card h3 {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 1.1rem;
+.compare-card h4 {
+  font-size: 1rem;
+  margin-bottom: 0.65rem;
+  color: var(--terracotta-deep);
 }
 
-.compare-card h3 svg {
-  width: 1em;
-  height: 1em;
-  flex-shrink: 0;
+.compare-card.client h4 {
+  color: #5f6d45; /* darkened sage for AA-contrast text on white */
 }
 
-.compare-list {
-  list-style: none;
+.compare-card p {
   margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.75rem;
-}
-
-.compare-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.65rem;
   font-size: 0.98rem;
+  line-height: 1.55;
 }
-
-.compare-list svg {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  margin-top: 0.1rem;
-}
-
-.compare-card .icon-check { color: var(--terracotta); }
-.compare-card.client .icon-check { color: var(--sage); }
 
 /* Pricing */
 .pricing-card {
