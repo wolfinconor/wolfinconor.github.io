@@ -24,6 +24,9 @@
 
   <link rel="stylesheet" href="styles.css" />
 
+  <!-- Calendly inline widget assets -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+
   <!-- TODO: Drop Google Analytics / Meta Pixel snippet here when ready -->
 </head>
 <body>
@@ -312,8 +315,9 @@
 
           <div id="form-success" class="form-success hidden" tabindex="-1">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke-linecap="round"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <h3>Thanks — you're on the calendar list.</h3>
-            <p>I'll reach out shortly to schedule your free consultation. Talk soon.</p>
+            <h3>Thanks — now pick a time that works for you.</h3>
+            <p>Your info's been sent. Choose a slot below to lock in your free 15-minute consultation.</p>
+            <div id="calendly-embed" class="calendly-inline-widget" data-url="https://calendly.com/conorwolfin/15-minute-meeting" style="min-width:280px;height:700px;"></div>
           </div>
         </div>
       </div>
@@ -335,7 +339,7 @@
               </button>
             </h3>
             <div class="faq-answer" id="faq-a6" role="region" aria-labelledby="faq-q6" hidden>
-              Technically, yes. But, the one thing often ignored is where that fee comes from. 
+              Technically, yes. But whats often ignored is where that fee comes from. 
               The seller  pays the commission out of the sale proceeds, which means the buyer is 
               effectively paying it in the form of a higher purchase price. To a seller, 
               paying a commission and selling for that much less are identical. The default contract 
@@ -450,5 +454,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>

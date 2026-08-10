@@ -41,6 +41,17 @@ document.addEventListener('DOMContentLoaded', function () {
             form.classList.add('hidden');
             successEl.classList.remove('hidden');
             successEl.focus();
+
+            var calendlyEl = document.getElementById('calendly-embed');
+            if (calendlyEl && window.Calendly) {
+              window.Calendly.initInlineWidget({
+                url:
+                  'https://calendly.com/conorwolfin/15-minute-meeting?hide_gdpr_banner=1' +
+                  '&name=' + encodeURIComponent(data.get('name') || '') +
+                  '&email=' + encodeURIComponent(data.get('email') || ''),
+                parentElement: calendlyEl
+              });
+            }
           } else {
             return response.json().then(function (data) {
               throw new Error(
