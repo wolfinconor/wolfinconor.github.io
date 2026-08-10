@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             var calendlyEl = document.getElementById('calendly-embed');
             if (calendlyEl && window.Calendly) {
+              calendlyEl.innerHTML = '';
               window.Calendly.initInlineWidget({
                 url:
                   'https://calendly.com/conorwolfin/15-minute-meeting?hide_gdpr_banner=1' +
