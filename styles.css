@@ -622,6 +622,53 @@ textarea:focus-visible {
   margin-bottom: 0;
 }
 
+/* Client dashboard */
+.dashboard-frame {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--line);
+  margin-bottom: 2.5rem;
+}
+
+.dashboard-frame img {
+  width: 100%;
+}
+
+.dashboard-features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (min-width: 720px) {
+  .dashboard-features {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.dashboard-feature {
+  text-align: center;
+}
+
+.dashboard-feature-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-feature h3 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.dashboard-feature p {
+  color: var(--warm-gray);
+  font-size: 0.92rem;
+  margin-bottom: 0;
+}
+
 /* Credibility strip */
 .credibility {
   background: var(--charcoal);
