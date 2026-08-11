@@ -8,6 +8,8 @@
   --terracotta-light: #E4B49B;
   --sage: #8B9A6B;
   --sage-light: #DCE3CF;
+  --royal-purple: #5D3FA3;
+  --royal-purple-light: #EEE7F8;
   --charcoal: #3E3630;
   --warm-gray: #6D6359; /* darkened slightly from brand #7A6F63 to clear 4.5:1 on cream-tint */
   --line: #E5DACB;
@@ -398,6 +400,33 @@ textarea:focus-visible {
   color: #5f6d45;
 }
 
+/* Limited-time price highlight */
+.price-original {
+  text-decoration: line-through;
+  color: var(--warm-gray);
+  font-weight: 600;
+}
+
+.price-highlight {
+  background: var(--royal-purple);
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.05em 0.4em;
+}
+
+.limited-badge {
+  display: inline-block;
+  background: var(--royal-purple-light);
+  color: var(--royal-purple);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
 /* Pricing */
 .pricing-card {
   background: #fff;
@@ -410,12 +439,29 @@ textarea:focus-visible {
   margin: 0 auto 2rem;
 }
 
+.amount-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 0.25rem;
+}
+
+.amount-row .price-original {
+  font-size: 1.5rem;
+}
+
 .pricing-card .amount {
   font-size: 3rem;
   font-weight: 800;
   color: var(--terracotta);
   line-height: 1;
-  margin-bottom: 0.25rem;
+}
+
+.pricing-card .amount.price-highlight {
+  color: #fff;
+  border-radius: 10px;
 }
 
 .pricing-card .amount-label {
@@ -490,9 +536,26 @@ textarea:focus-visible {
   margin-bottom: 0.5rem;
 }
 
+.savings-amount-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.savings-amount-row .price-original {
+  font-size: 1rem;
+}
+
 .savings-box .savings-amount {
   font-size: 1.6rem;
   font-weight: 800;
+}
+
+.savings-box .savings-amount.price-highlight {
+  color: #fff;
+  border-radius: 8px;
 }
 
 .savings-vs {
