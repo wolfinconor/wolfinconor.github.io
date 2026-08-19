@@ -1,4 +1,4 @@
-export function DashboardHeader({ clientNames }: { clientNames: string }) {
+export function DashboardHeader({ name }: { name: string }) {
   return (
     <header className="flex flex-wrap items-center justify-between gap-4">
       <div className="flex items-center gap-3">
@@ -37,7 +37,7 @@ export function DashboardHeader({ clientNames }: { clientNames: string }) {
         </div>
       </div>
       <div className="text-right">
-        <p className="font-bold text-charcoal">Welcome back, {clientNames}</p>
+        <p className="font-bold text-charcoal">Welcome back, {name}</p>
         <p className="text-sm text-warm-gray">
           Conor Wolfin &middot; WA Licensee #25007529
         </p>

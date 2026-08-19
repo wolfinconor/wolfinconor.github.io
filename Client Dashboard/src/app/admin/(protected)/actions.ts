@@ -5,6 +5,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth";
+import { fetchListingImage } from "@/lib/scrapeListing";
+import { DEFAULT_TIMELINE_TEMPLATE } from "@/lib/timelineTemplate";
 
 function generateShareToken() {
   return randomBytes(24).toString("base64url");
@@ -14,74 +16,184 @@ function str(formData: FormData, key: string) {
   return String(formData.get(key) ?? "").trim();
 }
 
-// ---------- Transaction ----------
+function optionalStr(formData: FormData, key: string) {
+  const value = str(formData, key);
+  return value.length > 0 ? value : null;
+}
 
-export async function createTransaction(formData: FormData) {
+function optionalInt(formData: FormData, key: string) {
+  const value = str(formData, key);
+  if (!value) return null;
+  const n = Math.round(Number(value));
+  return Number.isFinite(n) ? n : null;
+}
+
+function optionalDate(formData: FormData, key: string) {
+  const value = str(formData, key);
+  return value ? new Date(value) : null;
+}
+
+// ---------- Clients ----------
+
+export async function createClient(formData: FormData) {
   await requireAdmin();
 
-  const transaction = await prisma.transaction.create({
+  const client = await prisma.client.create({
     data: {
       shareToken: generateShareToken(),
-      clientNames: str(formData, "clientNames"),
-      propertyAddress: str(formData, "propertyAddress"),
-      propertyCity: str(formData, "propertyCity"),
-      offerAcceptedDate: new Date(str(formData, "offerAcceptedDate")),
-      targetClosingDate: new Date(str(formData, "targetClosingDate")),
-      currentStatusLabel: str(formData, "currentStatusLabel"),
+      name: str(formData, "name"),
     },
   });
 
   revalidatePath("/admin");
-  redirect(`/admin/${transaction.id}`);
+  redirect(`/admin/${client.id}`);
 }
 
-export async function updateTransaction(transactionId: string, formData: FormData) {
+export async function updateClient(clientId: string, formData: FormData) {
   await requireAdmin();
 
-  await prisma.transaction.update({
-    where: { id: transactionId },
-    data: {
-      clientNames: str(formData, "clientNames"),
-      propertyAddress: str(formData, "propertyAddress"),
-      propertyCity: str(formData, "propertyCity"),
-      offerAcceptedDate: new Date(str(formData, "offerAcceptedDate")),
-      targetClosingDate: new Date(str(formData, "targetClosingDate")),
-      currentStatusLabel: str(formData, "currentStatusLabel"),
-    },
+  await prisma.client.update({
+    where: { id: clientId },
+    data: { name: str(formData, "name") },
   });
 
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}`);
   revalidatePath("/admin");
 }
 
-export async function deleteTransaction(transactionId: string) {
+export async function deleteClient(clientId: string) {
   await requireAdmin();
 
-  await prisma.transaction.delete({ where: { id: transactionId } });
+  await prisma.client.delete({ where: { id: clientId } });
   revalidatePath("/admin");
   redirect("/admin");
 }
 
-// ---------- Timeline steps ----------
+// ---------- Properties ----------
 
-export async function addTimelineStep(transactionId: string, formData: FormData) {
+export async function addProperty(clientId: string, formData: FormData) {
   await requireAdmin();
 
-  const count = await prisma.timelineStep.count({ where: { transactionId } });
+  const listingUrl = optionalStr(formData, "listingUrl");
+  const imageUrl = listingUrl ? await fetchListingImage(listingUrl) : null;
+
+  const count = await prisma.property.count({ where: { clientId } });
+  const property = await prisma.property.create({
+    data: {
+      clientId,
+      listingUrl,
+      imageUrl,
+      address: optionalStr(formData, "address"),
+      city: optionalStr(formData, "city"),
+      price: optionalInt(formData, "price"),
+      notes: optionalStr(formData, "notes"),
+      order: count + 1,
+    },
+  });
+
+  revalidatePath(`/admin/${clientId}`);
+  redirect(`/admin/${clientId}/${property.id}`);
+}
+
+export async function updateProperty(
+  clientId: string,
+  propertyId: string,
+  formData: FormData,
+) {
+  await requireAdmin();
+
+  await prisma.property.update({
+    where: { id: propertyId },
+    data: {
+      listingUrl: optionalStr(formData, "listingUrl"),
+      imageUrl: optionalStr(formData, "imageUrl"),
+      address: optionalStr(formData, "address"),
+      city: optionalStr(formData, "city"),
+      price: optionalInt(formData, "price"),
+      notes: optionalStr(formData, "notes"),
+    },
+  });
+
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
+  revalidatePath(`/admin/${clientId}`);
+}
+
+export async function deleteProperty(clientId: string, propertyId: string) {
+  await requireAdmin();
+
+  await prisma.property.delete({ where: { id: propertyId } });
+  revalidatePath(`/admin/${clientId}`);
+  redirect(`/admin/${clientId}`);
+}
+
+export async function promoteToOffer(
+  clientId: string,
+  propertyId: string,
+  formData: FormData,
+) {
+  await requireAdmin();
+
+  const existingSteps = await prisma.timelineStep.count({ where: { propertyId } });
+
+  await prisma.property.update({
+    where: { id: propertyId },
+    data: {
+      status: "active",
+      offerAcceptedDate: optionalDate(formData, "offerAcceptedDate"),
+      targetClosingDate: optionalDate(formData, "targetClosingDate"),
+      currentStatusLabel: str(formData, "currentStatusLabel") || "Getting Started",
+      timelineSteps:
+        existingSteps === 0
+          ? { create: DEFAULT_TIMELINE_TEMPLATE }
+          : undefined,
+    },
+  });
+
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
+  revalidatePath(`/admin/${clientId}`);
+}
+
+export async function setPropertyStatus(
+  clientId: string,
+  propertyId: string,
+  formData: FormData,
+) {
+  await requireAdmin();
+
+  await prisma.property.update({
+    where: { id: propertyId },
+    data: { status: str(formData, "status") },
+  });
+
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
+  revalidatePath(`/admin/${clientId}`);
+}
+
+// ---------- Timeline steps ----------
+
+export async function addTimelineStep(
+  clientId: string,
+  propertyId: string,
+  formData: FormData,
+) {
+  await requireAdmin();
+
+  const count = await prisma.timelineStep.count({ where: { propertyId } });
   await prisma.timelineStep.create({
     data: {
-      transactionId,
+      propertyId,
       label: str(formData, "label"),
       date: str(formData, "date"),
       status: str(formData, "status") || "upcoming",
       order: count + 1,
     },
   });
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }
 
 export async function updateTimelineStep(
-  transactionId: string,
+  clientId: string,
+  propertyId: string,
   stepId: string,
   formData: FormData,
 ) {
@@ -95,25 +207,30 @@ export async function updateTimelineStep(
       status: str(formData, "status"),
     },
   });
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }
 
-export async function deleteTimelineStep(transactionId: string, stepId: string) {
+export async function deleteTimelineStep(
+  clientId: string,
+  propertyId: string,
+  stepId: string,
+) {
   await requireAdmin();
 
   await prisma.timelineStep.delete({ where: { id: stepId } });
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }
 
 export async function moveTimelineStep(
-  transactionId: string,
+  clientId: string,
+  propertyId: string,
   stepId: string,
   direction: "up" | "down",
 ) {
   await requireAdmin();
 
   const steps = await prisma.timelineStep.findMany({
-    where: { transactionId },
+    where: { propertyId },
     orderBy: { order: "asc" },
   });
   const index = steps.findIndex((s) => s.id === stepId);
@@ -126,29 +243,34 @@ export async function moveTimelineStep(
     prisma.timelineStep.update({ where: { id: a.id }, data: { order: b.order } }),
     prisma.timelineStep.update({ where: { id: b.id }, data: { order: a.order } }),
   ]);
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }
 
 // ---------- Next steps ----------
 
-export async function addNextStep(transactionId: string, formData: FormData) {
+export async function addNextStep(
+  clientId: string,
+  propertyId: string,
+  formData: FormData,
+) {
   await requireAdmin();
 
-  const count = await prisma.nextStep.count({ where: { transactionId } });
+  const count = await prisma.nextStep.count({ where: { propertyId } });
   await prisma.nextStep.create({
     data: {
-      transactionId,
+      propertyId,
       text: str(formData, "text"),
       dueDate: str(formData, "dueDate"),
       status: "open",
       order: count + 1,
     },
   });
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }
 
 export async function toggleNextStep(
-  transactionId: string,
+  clientId: string,
+  propertyId: string,
   stepId: string,
   formData: FormData,
 ) {
@@ -159,36 +281,45 @@ export async function toggleNextStep(
     where: { id: stepId },
     data: { status: done ? "done" : "open" },
   });
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }
 
-export async function deleteNextStep(transactionId: string, stepId: string) {
+export async function deleteNextStep(
+  clientId: string,
+  propertyId: string,
+  stepId: string,
+) {
   await requireAdmin();
 
   await prisma.nextStep.delete({ where: { id: stepId } });
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }
 
 // ---------- Cost items ----------
 
-export async function addCostItem(transactionId: string, formData: FormData) {
+export async function addCostItem(
+  clientId: string,
+  propertyId: string,
+  formData: FormData,
+) {
   await requireAdmin();
 
-  const count = await prisma.costItem.count({ where: { transactionId } });
+  const count = await prisma.costItem.count({ where: { propertyId } });
   await prisma.costItem.create({
     data: {
-      transactionId,
+      propertyId,
       label: str(formData, "label"),
       amount: Math.round(Number(str(formData, "amount")) || 0),
       isTotal: formData.get("isTotal") === "on",
       order: count + 1,
     },
   });
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }
 
 export async function updateCostItem(
-  transactionId: string,
+  clientId: string,
+  propertyId: string,
   costId: string,
   formData: FormData,
 ) {
@@ -202,36 +333,45 @@ export async function updateCostItem(
       isTotal: formData.get("isTotal") === "on",
     },
   });
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }
 
-export async function deleteCostItem(transactionId: string, costId: string) {
+export async function deleteCostItem(
+  clientId: string,
+  propertyId: string,
+  costId: string,
+) {
   await requireAdmin();
 
   await prisma.costItem.delete({ where: { id: costId } });
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }
 
 // ---------- To-do items ----------
 
-export async function addTodoItem(transactionId: string, formData: FormData) {
+export async function addTodoItem(
+  clientId: string,
+  propertyId: string,
+  formData: FormData,
+) {
   await requireAdmin();
 
-  const count = await prisma.todoItem.count({ where: { transactionId } });
+  const count = await prisma.todoItem.count({ where: { propertyId } });
   await prisma.todoItem.create({
     data: {
-      transactionId,
+      propertyId,
       text: str(formData, "text"),
       assignedTo: str(formData, "assignedTo"),
       status: "open",
       order: count + 1,
     },
   });
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }
 
 export async function toggleTodoItem(
-  transactionId: string,
+  clientId: string,
+  propertyId: string,
   todoId: string,
   formData: FormData,
 ) {
@@ -242,12 +382,16 @@ export async function toggleTodoItem(
     where: { id: todoId },
     data: { status: done ? "done" : "open" },
   });
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }
 
-export async function deleteTodoItem(transactionId: string, todoId: string) {
+export async function deleteTodoItem(
+  clientId: string,
+  propertyId: string,
+  todoId: string,
+) {
   await requireAdmin();
 
   await prisma.todoItem.delete({ where: { id: todoId } });
-  revalidatePath(`/admin/${transactionId}`);
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }

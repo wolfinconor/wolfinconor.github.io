@@ -30,28 +30,60 @@ export type TodoItemData = {
   status: "open" | "done";
 };
 
-export type TransactionData = {
+export type PropertyStatus = "comparing" | "active" | "closed";
+
+export type PropertyData = {
   id: string;
-  shareToken: string;
-  clientNames: string;
-  propertyAddress: string;
-  propertyCity: string;
-  offerAcceptedDate: string;
-  targetClosingDate: string;
-  currentStatusLabel: string;
+  listingUrl: string | null;
+  imageUrl: string | null;
+  address: string | null;
+  city: string | null;
+  price: number | null;
+  notes: string | null;
+  status: PropertyStatus;
+  order: number;
+  offerAcceptedDate: string | null;
+  targetClosingDate: string | null;
+  currentStatusLabel: string | null;
   timelineSteps: TimelineStepData[];
   nextSteps: NextStepData[];
   costItems: CostItemData[];
   todoItems: TodoItemData[];
 };
 
-export function formatDateShort(date: Date | string) {
+export type ClientData = {
+  id: string;
+  shareToken: string;
+  name: string;
+  properties: PropertyData[];
+};
+
+export function formatDateShort(date: Date | string | null | undefined) {
+  if (!date) return "TBD";
   const d = typeof date === "string" ? new Date(date) : date;
   return d.toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     timeZone: "UTC",
   });
+}
+
+export function propertyLabel(property: {
+  address: string | null;
+  city: string | null;
+  listingUrl: string | null;
+}) {
+  if (property.address) {
+    return property.city ? `${property.address}, ${property.city}` : property.address;
+  }
+  if (property.listingUrl) {
+    try {
+      return new URL(property.listingUrl).hostname.replace(/^www\./, "");
+    } catch {
+      // fall through
+    }
+  }
+  return "Untitled listing";
 }
 
 export function formatCurrency(amount: number) {

@@ -7,17 +7,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Transaction {
-  id                  String   @id @default(cuid())
-  shareToken          String   @unique
-  clientNames         String
-  propertyAddress     String
-  propertyCity        String
-  offerAcceptedDate   DateTime
-  targetClosingDate   DateTime
-  currentStatusLabel  String
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+model Client {
+  id         String   @id @default(cuid())
+  shareToken String   @unique
+  name       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  properties Property[]
+}
+
+model Property {
+  id       String @id @default(cuid())
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  listingUrl String?
+  imageUrl   String?
+  address    String?
+  city       String?
+  price      Int?
+  notes      String?
+
+  status String @default("comparing") // "comparing" | "active" | "closed"
+  order  Int    @default(0)
+
+  offerAcceptedDate  DateTime?
+  targetClosingDate  DateTime?
+  currentStatusLabel String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   timelineSteps TimelineStep[]
   nextSteps     NextStep[]
@@ -26,41 +46,41 @@ model Transaction {
 }
 
 model TimelineStep {
-  id            String      @id @default(cuid())
-  transactionId String
-  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
-  label         String
-  date          String
-  order         Int
-  status        String // "done" | "current" | "upcoming"
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  label      String
+  date       String
+  order      Int
+  status     String // "done" | "current" | "upcoming"
 }
 
 model NextStep {
-  id            String      @id @default(cuid())
-  transactionId String
-  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
-  text          String
-  dueDate       String
-  order         Int         @default(0)
-  status        String // "open" | "done"
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  text       String
+  dueDate    String
+  order      Int      @default(0)
+  status     String // "open" | "done"
 }
 
 model CostItem {
-  id            String      @id @default(cuid())
-  transactionId String
-  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
-  label         String
-  amount        Int // stored in whole dollars
-  order         Int
-  isTotal       Boolean     @default(false)
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  label      String
+  amount     Int // stored in whole dollars
+  order      Int
+  isTotal    Boolean  @default(false)
 }
 
 model TodoItem {
-  id            String      @id @default(cuid())
-  transactionId String
-  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
-  text          String
-  assignedTo    String
-  order         Int         @default(0)
-  status        String // "open" | "done"
+  id         String   @id @default(cuid())
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  text       String
+  assignedTo String
+  order      Int      @default(0)
+  status     String // "open" | "done"
 }

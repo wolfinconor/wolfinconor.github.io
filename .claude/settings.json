@@ -3,7 +3,11 @@
     "allow": [
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(python3 -c \"import playwright; print\\('py playwright ok'\\)\")",
+      "Bash(node -e \"require\\('playwright'\\); console.log\\('node playwright ok'\\)\")",
+      "Bash(npx --yes playwright --version)",
+      "Bash(node -e \"require\\('playwright'\\)\")"
     ]
   }
 }
