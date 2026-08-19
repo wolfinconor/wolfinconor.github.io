@@ -42,6 +42,7 @@ export type PropertyData = {
   notes: string | null;
   status: PropertyStatus;
   order: number;
+  isFavorite: boolean;
   offerAcceptedDate: string | null;
   targetClosingDate: string | null;
   currentStatusLabel: string | null;

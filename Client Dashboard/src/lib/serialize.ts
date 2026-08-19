@@ -30,6 +30,7 @@ export function serializeProperty(p: FullProperty): PropertyData {
     notes: p.notes,
     status: p.status as PropertyData["status"],
     order: p.order,
+    isFavorite: p.isFavorite,
     offerAcceptedDate: p.offerAcceptedDate ? p.offerAcceptedDate.toISOString() : null,
     targetClosingDate: p.targetClosingDate ? p.targetClosingDate.toISOString() : null,
     currentStatusLabel: p.currentStatusLabel,

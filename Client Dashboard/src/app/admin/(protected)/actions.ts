@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth";
-import { fetchListingImage } from "@/lib/scrapeListing";
+import { fetchListingMeta } from "@/lib/scrapeListing";
 import { DEFAULT_TIMELINE_TEMPLATE } from "@/lib/timelineTemplate";
 
 function generateShareToken() {
@@ -75,17 +75,19 @@ export async function addProperty(clientId: string, formData: FormData) {
   await requireAdmin();
 
   const listingUrl = optionalStr(formData, "listingUrl");
-  const imageUrl = listingUrl ? await fetchListingImage(listingUrl) : null;
+  const scraped = listingUrl
+    ? await fetchListingMeta(listingUrl)
+    : { imageUrl: null, address: null, city: null, price: null };
 
   const count = await prisma.property.count({ where: { clientId } });
   const property = await prisma.property.create({
     data: {
       clientId,
       listingUrl,
-      imageUrl,
-      address: optionalStr(formData, "address"),
-      city: optionalStr(formData, "city"),
-      price: optionalInt(formData, "price"),
+      imageUrl: scraped.imageUrl,
+      address: optionalStr(formData, "address") ?? scraped.address,
+      city: optionalStr(formData, "city") ?? scraped.city,
+      price: optionalInt(formData, "price") ?? scraped.price,
       notes: optionalStr(formData, "notes"),
       order: count + 1,
     },

@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { fetchListingImage } from "@/lib/scrapeListing";
+import { fetchListingMeta } from "@/lib/scrapeListing";
 import { DEFAULT_TIMELINE_TEMPLATE } from "@/lib/timelineTemplate";
 
 function str(formData: FormData, key: string) {
@@ -36,20 +36,37 @@ export async function addPropertyAsClient(token: string, formData: FormData) {
   const client = await requireClient(token);
 
   const listingUrl = optionalStr(formData, "listingUrl");
-  const imageUrl = listingUrl ? await fetchListingImage(listingUrl) : null;
+  const scraped = listingUrl
+    ? await fetchListingMeta(listingUrl)
+    : { imageUrl: null, address: null, city: null, price: null };
 
   const count = await prisma.property.count({ where: { clientId: client.id } });
   await prisma.property.create({
     data: {
       clientId: client.id,
       listingUrl,
-      imageUrl,
+      imageUrl: scraped.imageUrl,
+      address: scraped.address,
+      city: scraped.city,
+      price: scraped.price,
       notes: optionalStr(formData, "notes"),
       order: count + 1,
     },
   });
 
   revalidatePath(`/dashboard/${token}`);
+}
+
+export async function toggleFavoriteAsClient(token: string, propertyId: string) {
+  const property = await requireOwnedProperty(token, propertyId);
+
+  await prisma.property.update({
+    where: { id: propertyId },
+    data: { isFavorite: !property.isFavorite },
+  });
+
+  revalidatePath(`/dashboard/${token}`);
+  revalidatePath(`/dashboard/${token}/${propertyId}`);
 }
 
 export async function removePropertyAsClient(token: string, propertyId: string) {

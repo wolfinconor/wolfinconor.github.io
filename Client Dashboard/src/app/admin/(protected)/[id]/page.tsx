@@ -92,6 +92,7 @@ export default async function ClientPage({ params }: { params: { id: string } })
                 <PropertyThumb imageUrl={p.imageUrl} alt={propertyLabel(p)} className="h-32 w-full" />
                 <div className="space-y-1 p-3">
                   <p className="truncate text-sm font-bold text-charcoal group-hover:text-terracotta">
+                    {p.isFavorite && "★ "}
                     {propertyLabel(p)}
                   </p>
                   <div className="flex items-center justify-between">

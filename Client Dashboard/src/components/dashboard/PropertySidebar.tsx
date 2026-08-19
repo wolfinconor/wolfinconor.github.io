@@ -33,7 +33,7 @@ export function PropertySidebar({
             : "border-line bg-white text-charcoal hover:border-terracotta"
         }`}
       >
-        Compare all homes
+        Home list
       </Link>
 
       <div className="space-y-2">
@@ -62,6 +62,7 @@ export function PropertySidebar({
               />
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-bold text-charcoal">
+                  {property.isFavorite && "★ "}
                   {propertyLabel(property)}
                 </p>
                 <div className="flex items-center gap-2">

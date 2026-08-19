@@ -29,8 +29,9 @@ model Property {
   price      Int?
   notes      String?
 
-  status String @default("comparing") // "comparing" | "active" | "closed"
-  order  Int    @default(0)
+  status     String  @default("comparing") // "comparing" | "active" | "closed"
+  order      Int     @default(0)
+  isFavorite Boolean @default(false)
 
   offerAcceptedDate  DateTime?
   targetClosingDate  DateTime?

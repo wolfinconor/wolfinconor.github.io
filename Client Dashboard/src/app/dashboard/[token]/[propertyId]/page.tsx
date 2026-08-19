@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { serializeProperty, propertyInclude } from "@/lib/serialize";
 import { propertyLabel, formatCurrency } from "@/lib/types";
 import { PropertyThumb } from "@/components/dashboard/PropertyThumb";
+import { StarButton } from "@/components/dashboard/StarButton";
 import { DashboardView } from "@/components/dashboard/DashboardView";
 import { startOfferAsClient, removePropertyAsClient } from "../actions";
 
@@ -39,7 +40,12 @@ export default async function ClientPropertyPage({
   return (
     <div className="space-y-6">
       <div className="overflow-hidden rounded-card border border-line bg-white">
-        <PropertyThumb imageUrl={data.imageUrl} alt={propertyLabel(data)} className="h-64 w-full" />
+        <div className="relative">
+          <PropertyThumb imageUrl={data.imageUrl} alt={propertyLabel(data)} className="h-64 w-full" />
+          <div className="absolute right-4 top-4">
+            <StarButton token={params.token} propertyId={data.id} isFavorite={data.isFavorite} />
+          </div>
+        </div>
         <div className="space-y-3 p-6">
           <h1 className="font-serif text-2xl font-semibold text-charcoal">
             {propertyLabel(data)}
