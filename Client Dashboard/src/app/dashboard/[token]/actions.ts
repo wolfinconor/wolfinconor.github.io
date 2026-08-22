@@ -4,7 +4,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { fetchListingMeta } from "@/lib/scrapeListing";
-import { DEFAULT_TIMELINE_TEMPLATE } from "@/lib/timelineTemplate";
+import { BUILDING_OFFER_STEP } from "@/lib/timelineTemplate";
+import { applyOfferTerms, parseOfferTermsForm } from "@/lib/offerTerms";
 
 function str(formData: FormData, key: string) {
   return String(formData.get(key) ?? "").trim();
@@ -93,7 +94,7 @@ export async function startOfferAsClient(token: string, propertyId: string) {
         status: "active",
         currentStatusLabel: property.currentStatusLabel ?? "Getting Started",
         timelineSteps:
-          existingSteps === 0 ? { create: DEFAULT_TIMELINE_TEMPLATE } : undefined,
+          existingSteps === 0 ? { create: BUILDING_OFFER_STEP } : undefined,
       },
     });
   }
@@ -101,4 +102,18 @@ export async function startOfferAsClient(token: string, propertyId: string) {
   revalidatePath(`/dashboard/${token}`);
   revalidatePath(`/dashboard/${token}/${propertyId}`);
   redirect(`/dashboard/${token}/${propertyId}`);
+}
+
+export async function saveOfferTermsAsClient(
+  token: string,
+  propertyId: string,
+  formData: FormData,
+) {
+  await requireOwnedProperty(token, propertyId);
+
+  const input = parseOfferTermsForm(formData);
+  await applyOfferTerms(propertyId, input);
+
+  revalidatePath(`/dashboard/${token}`);
+  revalidatePath(`/dashboard/${token}/${propertyId}`);
 }

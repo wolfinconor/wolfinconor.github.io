@@ -4,8 +4,15 @@ import { Timeline } from "./Timeline";
 import { NextStepsCard } from "./NextStepsCard";
 import { CostsCard } from "./CostsCard";
 import { TodoCard } from "./TodoCard";
+import { OfferTermsEditToggle } from "./OfferTermsEditToggle";
 
-export function DashboardView({ property }: { property: PropertyData }) {
+export function DashboardView({
+  token,
+  property,
+}: {
+  token: string;
+  property: PropertyData;
+}) {
   return (
     <div className="space-y-8">
       <PropertyBar
@@ -15,6 +22,8 @@ export function DashboardView({ property }: { property: PropertyData }) {
         targetClosingDate={property.targetClosingDate}
         statusLabel={property.currentStatusLabel}
       />
+
+      <OfferTermsEditToggle token={token} property={property} />
 
       <Timeline steps={property.timelineSteps} />
 

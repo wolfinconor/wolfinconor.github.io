@@ -32,6 +32,27 @@ export type TodoItemData = {
 
 export type PropertyStatus = "comparing" | "active" | "closed";
 
+export type OfferTermsData = {
+  offerPrice: number | null;
+  earnestMoney: number | null;
+  financingType: string;
+  downPaymentPercent: number | null;
+  hasInspection: boolean;
+  inspectionCost: number | null;
+  inspectionPeriodDays: number | null;
+  hasAppraisal: boolean;
+  appraisalCost: number | null;
+  appraisalPeriodDays: number | null;
+  hasHomeWarranty: boolean;
+  homeWarrantyCost: number | null;
+  sellerConcessions: number | null;
+  saleContingency: boolean;
+  hasEscalation: boolean;
+  escalationCap: number | null;
+  closingCostEstimate: number | null;
+  personalProperty: string | null;
+};
+
 export type PropertyData = {
   id: string;
   listingUrl: string | null;
@@ -46,6 +67,7 @@ export type PropertyData = {
   offerAcceptedDate: string | null;
   targetClosingDate: string | null;
   currentStatusLabel: string | null;
+  offerTerms: OfferTermsData | null;
   timelineSteps: TimelineStepData[];
   nextSteps: NextStepData[];
   costItems: CostItemData[];

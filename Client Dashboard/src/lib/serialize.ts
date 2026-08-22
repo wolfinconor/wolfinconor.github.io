@@ -5,6 +5,7 @@ import type {
   NextStep,
   CostItem,
   TodoItem,
+  OfferTerms,
 } from "@prisma/client";
 import type { ClientData, PropertyData } from "./types";
 
@@ -13,6 +14,7 @@ type FullProperty = Property & {
   nextSteps: NextStep[];
   costItems: CostItem[];
   todoItems: TodoItem[];
+  offerTerms: OfferTerms | null;
 };
 
 type FullClient = Client & {
@@ -34,6 +36,26 @@ export function serializeProperty(p: FullProperty): PropertyData {
     offerAcceptedDate: p.offerAcceptedDate ? p.offerAcceptedDate.toISOString() : null,
     targetClosingDate: p.targetClosingDate ? p.targetClosingDate.toISOString() : null,
     currentStatusLabel: p.currentStatusLabel,
+    offerTerms: p.offerTerms && {
+      offerPrice: p.offerTerms.offerPrice,
+      earnestMoney: p.offerTerms.earnestMoney,
+      financingType: p.offerTerms.financingType,
+      downPaymentPercent: p.offerTerms.downPaymentPercent,
+      hasInspection: p.offerTerms.hasInspection,
+      inspectionCost: p.offerTerms.inspectionCost,
+      inspectionPeriodDays: p.offerTerms.inspectionPeriodDays,
+      hasAppraisal: p.offerTerms.hasAppraisal,
+      appraisalCost: p.offerTerms.appraisalCost,
+      appraisalPeriodDays: p.offerTerms.appraisalPeriodDays,
+      hasHomeWarranty: p.offerTerms.hasHomeWarranty,
+      homeWarrantyCost: p.offerTerms.homeWarrantyCost,
+      sellerConcessions: p.offerTerms.sellerConcessions,
+      saleContingency: p.offerTerms.saleContingency,
+      hasEscalation: p.offerTerms.hasEscalation,
+      escalationCap: p.offerTerms.escalationCap,
+      closingCostEstimate: p.offerTerms.closingCostEstimate,
+      personalProperty: p.offerTerms.personalProperty,
+    },
     timelineSteps: p.timelineSteps.map((s) => ({
       id: s.id,
       label: s.label,
@@ -81,6 +103,7 @@ export const propertyInclude = {
   nextSteps: { orderBy: { order: "asc" as const } },
   costItems: { orderBy: { order: "asc" as const } },
   todoItems: { orderBy: { order: "asc" as const } },
+  offerTerms: true,
 };
 
 export const clientInclude = {

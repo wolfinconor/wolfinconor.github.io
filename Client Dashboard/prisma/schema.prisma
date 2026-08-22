@@ -44,6 +44,38 @@ model Property {
   nextSteps     NextStep[]
   costItems     CostItem[]
   todoItems     TodoItem[]
+  offerTerms    OfferTerms?
+}
+
+model OfferTerms {
+  id         String   @id @default(cuid())
+  propertyId String   @unique
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  offerPrice         Int?
+  earnestMoney       Int?
+  financingType      String @default("conventional") // "cash" | "conventional" | "fha" | "va"
+  downPaymentPercent Int?
+
+  hasInspection        Boolean @default(true)
+  inspectionCost       Int?
+  inspectionPeriodDays Int?
+
+  hasAppraisal        Boolean @default(true)
+  appraisalCost       Int?
+  appraisalPeriodDays Int?
+
+  hasHomeWarranty  Boolean @default(false)
+  homeWarrantyCost Int?
+
+  sellerConcessions   Int?
+  saleContingency     Boolean @default(false)
+  hasEscalation       Boolean @default(false)
+  escalationCap       Int?
+  closingCostEstimate Int?
+  personalProperty    String?
+
+  updatedAt DateTime @updatedAt
 }
 
 model TimelineStep {

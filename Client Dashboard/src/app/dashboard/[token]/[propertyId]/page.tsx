@@ -4,7 +4,10 @@ import { serializeProperty, propertyInclude } from "@/lib/serialize";
 import { propertyLabel, formatCurrency } from "@/lib/types";
 import { PropertyThumb } from "@/components/dashboard/PropertyThumb";
 import { StarButton } from "@/components/dashboard/StarButton";
+import { PropertyBar } from "@/components/dashboard/PropertyBar";
+import { Timeline } from "@/components/dashboard/Timeline";
 import { DashboardView } from "@/components/dashboard/DashboardView";
+import { OfferBuilderForm } from "@/components/dashboard/OfferBuilderForm";
 import { startOfferAsClient, removePropertyAsClient } from "../actions";
 
 export const dynamic = "force-dynamic";
@@ -34,7 +37,22 @@ export default async function ClientPropertyPage({
   const data = serializeProperty(property);
 
   if (data.status !== "comparing") {
-    return <DashboardView property={data} />;
+    if (!data.offerTerms) {
+      return (
+        <div className="space-y-8">
+          <PropertyBar
+            address={data.address}
+            city={data.city}
+            offerAcceptedDate={data.offerAcceptedDate}
+            targetClosingDate={data.targetClosingDate}
+            statusLabel={data.currentStatusLabel}
+          />
+          <Timeline steps={data.timelineSteps} />
+          <OfferBuilderForm token={params.token} property={data} />
+        </div>
+      );
+    }
+    return <DashboardView token={params.token} property={data} />;
   }
 
   return (

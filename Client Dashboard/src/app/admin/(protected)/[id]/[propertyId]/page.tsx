@@ -4,10 +4,12 @@ import { prisma } from "@/lib/prisma";
 import { propertyInclude } from "@/lib/serialize";
 import { propertyLabel } from "@/lib/types";
 import { AutoSubmitCheckbox } from "@/components/admin/AutoSubmitCheckbox";
+import { OfferTermsFields } from "@/components/dashboard/OfferTermsFields";
 import {
   updateProperty,
   deleteProperty,
   promoteToOffer,
+  saveOfferTerms,
   setPropertyStatus,
   addTimelineStep,
   updateTimelineStep,
@@ -241,6 +243,24 @@ export default async function PropertyPage({
                 className="sm:col-span-3 rounded-pill bg-terracotta px-5 py-2 text-sm font-semibold text-white hover:opacity-90"
               >
                 Save offer details
+              </button>
+            </form>
+          </section>
+
+          <section className="rounded-card border border-line bg-white p-6">
+            <h2 className="mb-1 font-bold text-charcoal">Offer terms</h2>
+            <p className="mb-4 text-sm text-warm-gray">
+              The client can also set these from their dashboard. Saving
+              regenerates the cost breakdown and the inspection/appraisal/
+              financing steps in the timeline below.
+            </p>
+            <form action={saveOfferTerms.bind(null, clientId, propertyId)} className="space-y-6">
+              <OfferTermsFields defaultValues={property.offerTerms} suggestedPrice={property.price} />
+              <button
+                type="submit"
+                className="rounded-pill bg-terracotta px-5 py-2 text-sm font-semibold text-white hover:opacity-90"
+              >
+                {property.offerTerms ? "Update offer terms" : "Save offer terms"}
               </button>
             </form>
           </section>

@@ -6,7 +6,8 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth";
 import { fetchListingMeta } from "@/lib/scrapeListing";
-import { DEFAULT_TIMELINE_TEMPLATE } from "@/lib/timelineTemplate";
+import { BUILDING_OFFER_STEP } from "@/lib/timelineTemplate";
+import { applyOfferTerms, parseOfferTermsForm } from "@/lib/offerTerms";
 
 function generateShareToken() {
   return randomBytes(24).toString("base64url");
@@ -146,13 +147,26 @@ export async function promoteToOffer(
       currentStatusLabel: str(formData, "currentStatusLabel") || "Getting Started",
       timelineSteps:
         existingSteps === 0
-          ? { create: DEFAULT_TIMELINE_TEMPLATE }
+          ? { create: BUILDING_OFFER_STEP }
           : undefined,
     },
   });
 
   revalidatePath(`/admin/${clientId}/${propertyId}`);
   revalidatePath(`/admin/${clientId}`);
+}
+
+export async function saveOfferTerms(
+  clientId: string,
+  propertyId: string,
+  formData: FormData,
+) {
+  await requireAdmin();
+
+  const input = parseOfferTermsForm(formData);
+  await applyOfferTerms(propertyId, input);
+
+  revalidatePath(`/admin/${clientId}/${propertyId}`);
 }
 
 export async function setPropertyStatus(
