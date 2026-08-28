@@ -7,7 +7,13 @@
       "Bash(python3 -c \"import playwright; print\\('py playwright ok'\\)\")",
       "Bash(node -e \"require\\('playwright'\\); console.log\\('node playwright ok'\\)\")",
       "Bash(npx --yes playwright --version)",
-      "Bash(node -e \"require\\('playwright'\\)\")"
+      "Bash(node -e \"require\\('playwright'\\)\")",
+      "Bash(find / -iname \"*client_dashboard_mockup*\")",
+      "Read(//home/louie00333/**)",
+      "Bash(mkdir -p /home/louie00333/client_dashboard)",
+      "Bash(npm -v)",
+      "Read(//home/louie00333/client_dashboard/**)",
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --app --eslint --src-dir=false --import-alias \"@/*\" --use-npm --no-turbopack)"
     ]
   }
 }
