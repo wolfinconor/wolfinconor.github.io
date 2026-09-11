@@ -209,7 +209,7 @@ textarea:focus-visible {
   flex-shrink: 0;
 }
 
-.brand span {
+.brand-accent {
   color: var(--terracotta-deep);
 }
 
