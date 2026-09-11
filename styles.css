@@ -187,20 +187,53 @@ textarea:focus-visible {
   margin: 0 auto;
   padding: 0.9rem 1.25rem;
   display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.6rem;
   align-items: center;
   justify-content: space-between;
 }
 
 .brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 800;
   font-size: 1.1rem;
   color: var(--charcoal);
   text-decoration: none;
   letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.brand-mark {
+  flex-shrink: 0;
 }
 
 .brand span {
   color: var(--terracotta-deep);
+}
+
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.nav-links a {
+  color: var(--charcoal);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.nav-links a:hover {
+  color: var(--terracotta-deep);
+}
+
+@media (min-width: 800px) {
+  .nav-links {
+    display: flex;
+  }
 }
 
 .nav-cta {
@@ -208,78 +241,189 @@ textarea:focus-visible {
   font-size: 0.92rem;
 }
 
+@media (max-width: 420px) {
+  .brand {
+    font-size: 0.95rem;
+  }
+
+  .nav-cta {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.8rem;
+  }
+}
+
 /* Hero */
 .hero {
-  padding: 3.5rem 1.25rem 4rem;
-  text-align: center;
+  padding: 3rem 1.25rem 4rem;
 }
 
-.hero-inner {
-  max-width: 760px;
+.hero-grid {
+  max-width: 1080px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
 }
 
-.hero p.subhead {
-  font-size: 1.15rem;
-  color: var(--warm-gray);
-  max-width: 620px;
-  margin: 0 auto 1.75rem;
+@media (min-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1.15fr 1fr;
+    gap: 3rem;
+  }
 }
 
-.hero-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.badge {
+.hero-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   background: var(--sage-light);
   color: #4c5539;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
   padding: 0.45rem 0.9rem;
   border-radius: 999px;
+  margin-bottom: 1.25rem;
 }
 
-.badge svg {
-  width: 16px;
-  height: 16px;
+.hero-pill svg {
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
 }
 
-.price-callout {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  background: #fff;
-  border: 2px solid var(--terracotta-light);
-  border-radius: var(--radius);
-  padding: 1rem 1.75rem;
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow);
-}
-
-.price-callout .amount {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--terracotta);
-}
-
-.price-callout .label {
+.hero p.subhead {
+  font-size: 1.1rem;
   color: var(--warm-gray);
-  font-size: 0.95rem;
+  max-width: 520px;
+  margin: 0 0 1.75rem;
 }
 
 .hero-ctas {
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.hero-agent {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.hero-agent-avatar {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--terracotta-light);
+  color: var(--terracotta-deep);
+  display: flex;
+  align-items: center;
   justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.hero-agent-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--charcoal);
+}
+
+.hero-agent-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--warm-gray);
+}
+
+.verify-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #4c5539;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.verify-tag svg {
+  width: 14px;
+  height: 14px;
+}
+
+.verify-tag:hover {
+  text-decoration: underline;
+}
+
+/* Hero — closing cost comparison card */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.cost-card {
+  width: 100%;
+  max-width: 320px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem;
+}
+
+.cost-card-label {
+  font-size: 0.85rem;
+  color: var(--warm-gray);
+  margin-bottom: 0.75rem;
+}
+
+.cost-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+  color: var(--warm-gray);
+}
+
+.cost-row-highlight {
+  border-bottom: none;
+  color: var(--charcoal);
+  font-weight: 600;
+}
+
+.cost-value {
+  font-size: 1.05rem;
+  color: var(--charcoal);
+}
+
+.cost-value-accent {
+  font-weight: 800;
+  color: var(--terracotta-deep);
+}
+
+.cost-savings {
+  margin-top: 0.75rem;
+  background: var(--sage-light);
+  color: #2e4620;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.6rem;
+  border-radius: 8px;
+}
+
+.cost-note {
+  margin: 0.85rem 0 0;
+  font-size: 0.78rem;
+  color: var(--warm-gray);
 }
 
 /* Persona cards */
