@@ -1091,6 +1091,12 @@ textarea:focus-visible {
   font-size: 0.95rem;
 }
 
+.footer-logo {
+  height: 20px;
+  width: auto;
+  margin-top: 0.2rem;
+}
+
 .footer-disclaimer {
   border-top: 1px solid var(--line);
   padding-top: 1.5rem;
