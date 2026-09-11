@@ -254,22 +254,30 @@ textarea:focus-visible {
 
 /* Hero */
 .hero {
-  padding: 3rem 1.25rem 4rem;
+  padding: 0;
 }
 
 .hero-grid {
-  max-width: 1080px;
+  max-width: 1600px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.5rem;
-  align-items: center;
 }
 
 @media (min-width: 900px) {
   .hero-grid {
     grid-template-columns: 1.15fr 1fr;
-    gap: 3rem;
+    align-items: stretch;
+  }
+}
+
+.hero-content {
+  padding: 3rem 1.25rem 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .hero-content {
+    padding: 4.5rem clamp(1.5rem, 5vw, 4rem) 3.5rem clamp(1.25rem, 6vw, 5rem);
   }
 }
 
@@ -363,8 +371,20 @@ textarea:focus-visible {
 
 /* Hero — closing cost comparison card */
 .hero-visual {
+  background: var(--cream-tint);
+  border-top: 1px solid var(--line);
   display: flex;
+  align-items: center;
   justify-content: center;
+  padding: 2.5rem 1.25rem 3rem;
+}
+
+@media (min-width: 900px) {
+  .hero-visual {
+    border-top: none;
+    border-left: 1px solid var(--line);
+    padding: 3rem clamp(1.5rem, 5vw, 4rem);
+  }
 }
 
 .cost-card {
