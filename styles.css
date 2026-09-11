@@ -903,6 +903,22 @@ textarea:focus-visible {
   margin-bottom: 0.3rem;
 }
 
+.cred-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.5rem 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.cred-logo img {
+  display: block;
+  height: 22px;
+  width: auto;
+}
+
 .cred-item .cred-label {
   color: #cfc7bc;
   font-size: 0.9rem;
