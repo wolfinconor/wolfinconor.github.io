@@ -628,25 +628,6 @@ textarea:focus-visible {
   margin-bottom: 1.5rem;
 }
 
-.addons {
-  display: grid;
-  gap: 0.75rem;
-  text-align: left;
-  border-top: 1px solid var(--line);
-  padding-top: 1.5rem;
-}
-
-.addon-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.97rem;
-}
-
-.addon-row .addon-price {
-  font-weight: 700;
-  color: var(--charcoal);
-}
-
 .pricing-note {
   text-align: center;
   color: var(--warm-gray);
