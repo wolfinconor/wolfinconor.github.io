@@ -1,1 +1,5 @@
 .DS_Store
+
+# Nested, independent git repo — tracked in its own remote (wolfinconor/client_dashboard),
+# not as part of this one.
+/client_dashboard/
