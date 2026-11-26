@@ -681,14 +681,7 @@ textarea:focus-visible {
   color: var(--sage);
 }
 
-/* Limited-time price highlight — royal purple with a highlighter stroke */
-.price-original {
-  text-decoration: line-through;
-  text-decoration-thickness: 1.5px;
-  color: var(--warm-gray);
-  font-weight: 600;
-}
-
+/* Flat-fee price highlight — royal purple with a highlighter stroke */
 .price-highlight {
   color: var(--royal-purple);
   font-weight: 700;
@@ -699,26 +692,7 @@ textarea:focus-visible {
   box-decoration-break: clone;
 }
 
-.limited-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--royal-purple);
-  font-size: 0.74rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 0.75rem;
-}
 
-.limited-badge::before,
-.limited-badge::after {
-  content: "";
-  width: 1.4rem;
-  height: 2px;
-  background: var(--royal-purple);
-  opacity: 0.6;
-}
 
 /* Pricing — primary flat-fee card with a quieter full-service aside */
 .pricing-tiers {
@@ -850,11 +824,6 @@ textarea:focus-visible {
   font-family: var(--serif);
 }
 
-.amount-row .price-original {
-  font-size: 1.6rem;
-  font-weight: 500;
-}
-
 .pricing-card .amount {
   font-size: clamp(3.25rem, 8vw, 4.25rem);
   font-weight: 600;
@@ -923,10 +892,6 @@ textarea:focus-visible {
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.5rem;
-}
-
-.savings-amount-row .price-original {
-  font-size: 1.05rem;
 }
 
 .savings-box .savings-amount {
@@ -1224,7 +1189,7 @@ textarea:focus-visible {
 
 .cred-logo img {
   display: block;
-  height: 22px;
+  height: 32px;
   width: auto;
 }
 
@@ -1436,7 +1401,7 @@ textarea:focus-visible {
 }
 
 .footer-logo {
-  height: 20px;
+  height: 30px;
   width: auto;
   margin-top: 0.2rem;
 }
