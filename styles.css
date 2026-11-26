@@ -497,6 +497,14 @@ textarea:focus-visible {
   order: 2;
 }
 
+.cost-subtext {
+  display: block;
+  font-size: 0.76rem;
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--warm-gray);
+}
+
 .cost-row-highlight {
   color: var(--charcoal);
   font-weight: 600;
